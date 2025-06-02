@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Popup</title>
+    <style>
+        /* 定义弹窗的样式 */
+        #popup {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 创建弹窗元素 -->
+    <div id="popup">白生</div>
+
+    <script>
+        // 获取弹窗元素
+        const popup = document.getElementById('popup');
+        let x = 0;
+        let y = 0;
+        let dx = 1;
+        let dy = 1;
+        let animationId;
+
+        // 定义移动弹窗的函数
+        function movePopup() {
+            x += dx;
+            y += dy;
+
+            // 边界检测
+            if (x + popup.offsetWidth > window.innerWidth || x < 0) {
+                dx = -dx;
+            }
+            if (y + popup.offsetHeight > window.innerHeight || y < 0) {
+                dy = -dy;
+            }
+
+            // 设置弹窗的位置
+            popup.style.left = x + 'px';
+            popup.style.top = y + 'px';
+
+            // 循环调用移动函数
+            animationId = requestAnimationFrame(movePopup);
+        }
+
+        // 开始移动弹窗
+        movePopup();
+
+        // 鼠标进入弹窗时停止移动
+        popup.addEventListener('mouseenter', () => {
+            cancelAnimationFrame(animationId);
+        });
+
+        // 鼠标离开弹窗时继续移动
+        popup.addEventListener('mouseleave', () => {
+            animationId = requestAnimationFrame(movePopup);
+        });
+    </script>
+
+</body>
+
+</html>
