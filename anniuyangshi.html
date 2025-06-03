@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>按钮框架特效</title>
+    <style>
+        /* 定义按钮容器样式 */
+        .button-container {
+            display: inline-block;
+            padding: 15px;
+            transition: all 0.8s ease;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+        }
+
+        /* 鼠标悬浮时容器的样式 */
+        .button-container:hover {
+            transform: scale(1.1);
+            background: linear-gradient(to right, #db8d34, #db8d34);
+        }
+
+        /* 按钮的样式 */
+        button {
+            padding: 0.5px 25px;
+            font-size: 20px;
+            border: none;
+            background-color: hsla(0, 100%, 100%, 0);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 按钮容器包裹按钮 -->
+    <div class="button-container">
+        <button>点击我</button>
+    </div>
+</body>
+
+</html>
