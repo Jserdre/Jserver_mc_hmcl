@@ -32,11 +32,11 @@
 			left: 50%;
 			transform: translateX(-50%);
 			width: 600px;
-			background: rgb(32, 29, 29);
+			background: rgb(32, 32, 32);
 			border-radius: 8px;
 			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 			padding: 40px;
-			transition: top 0.8s ease-out;
+			transition: top 0.4s ease-out;
 			/* 下滑动画 */
 			z-index: 1000;
 		}
@@ -190,12 +190,14 @@
 		<!-- 悬浮窗结构 -->
 		<div class="popup" id="myPopup">
 			<span class="close-btn" onclick="hidePopup()">×</span>
-			<h3>温馨提示</h3>
+			<h3 style="color: rgb(255, 91, 91);">温馨提示：</h3>
 			<hr>
-			<h4>服务器完全开放，请自觉遵守道德规范<br>切勿影响他人正常游玩，谢谢配合。</h4><br>
-			<a href="projects-detail.html" target="_blank">
-				<h4>我同意以上观点</h4>
-			</a><br>
+			<h4>服务器自由开放，请自觉遵守道德规范 <br> 维护自己与其它玩家的利益，不生事端 <br>切勿影响他人正常游玩，谢谢配合。</h4>
+			<hr>
+			<h4>
+			<a href="projects-detail.html" target="_blank" style="text-align: center;">
+				<p style="text-align: center; font-size: 30px; lighting-color: #ff9d00; ">我同意以上观点并承诺遵守</p>
+			</a><br></h4>
 		</div>
 
 		<!-- 遮罩层 -->

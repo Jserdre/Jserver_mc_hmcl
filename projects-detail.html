@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<title>[Jserver]游戏下载网</title>
-	<meta name="description" content="Edward Personal Portfolio Bootstrap 5 Template is a stunning and elegant looking template."/>
-	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta charset="UTF-8">
+    <title>[Jserver]游戏下载网</title>
+    <meta name="description" content="Edward Personal Portfolio Bootstrap 5 Template is a stunning and elegant looking template."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-	<!-- Stylesheets -->
-	<link href="css/bootstrap.css" rel="stylesheet">
-	<link href="css/main.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
+    <!-- Stylesheets -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
 
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&family=Zilla+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;600;700;800;900&family=Zilla+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-	<!-- Add site Favicon -->
-	<link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-	<link rel="icon" href="images/favicon.png" type="image/x-icon">
-	<meta name="msapplication-TileImage" content="images/favicon.png" />
-	<style>
-
-body {
+    <!-- Add site Favicon -->
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <meta name="msapplication-TileImage" content="images/favicon.png" />
+    
+    <!-- 弹窗样式 -->
+    <style>
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #383838;
         }
 
-		 /* 容器样式 */
-		 .grid-container {
+        /* 容器样式 */
+        .grid-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -77,278 +78,347 @@ body {
             text-decoration: underline;
         }
 
-		p {
-			font-size : "40px"
-		}
+        p {
+            font-size: 16px;
+        }
 
+        .cent {
+            text-align: center;
+        }
 
-		.cent {
-			text-align: center;
-		}
+        a {
+            font-size: 35px;
+            text-decoration: none;
+            color: #ff9d00;
+            display: inline-block;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 1.4);
+        }
 
-		/* 设置每一栏的样式
-		.column {
-			flex: 1;
-			padding: 20px;
-			border: 0px solid #ccc;
-			text-align: center;
-		}
- */
-		a {
+        a:hover {
+            transform: scale(1.2);
+            color: #00a6ff;
+            text-decoration: underline;
+        }
 
-			font-size: 35px;
-			text-decoration: none;
-			color: #ff9d00;
-			display: inline-block;
-			transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 1.4);
-		}
+        h2 {
+            text-align: center;
+        }
 
-		a:hover {
-			transform: scale(1.2);
-			color: #00a6ff;
-			text-decoration: underline;
-		}
+        #d2d {
+            color: #2d2d2d;
+        }
 
-		h2 {
-			text-align: center;
-		}
-
-		#d2d {
-			color: #2d2d2d;
-		}
-	</style>
+        /* 弹窗样式增强 */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0,0,0,0.6);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .popup-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background-color: rgb(19, 19, 19);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            max-width: 90%;
+            width: 32rem;
+        }
+        
+        .popup.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.2s;
+        }
+        
+        .popup-close:hover {
+            color: #1f2937;
+        }
+        
+        .popup h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+        
+        .popup a {
+            display: block;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.75rem;
+            background-color: #1b1b1b;
+            border-radius: 0.375rem;
+            color: #3b82f6;
+            text-decoration: none;
+            transition: background-color 0.2s;
+            font-size: 1rem;
+        }
+        
+        .popup a:hover {
+            background-color: #3c3c3c;
+            transform: none;
+        }
+    </style>
 </head>
 
 <body class="dark-body">
 
 <div class="page-wrapper">
-	
+
     <!-- Main Header-->
     <header class="main-header">
-    	
-    	<!-- Header Upper -->
-        <div class="header-upper">
-        	<div class="outer-container">
-            	<div class="inner-container clearfix">
-                	
-                	
-					
-                   	<div class="nav-outer pull-left clearfix">
-						<!-- Mobile Navigation Toggler -->
-                        <div class="mobile-nav-toggler"><span class="icon ti-menu"></span></div>
-						<!-- Main Menu -->
-						<nav class="main-menu navbar-expand-md">
-							<div class="navbar-header">
-								<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-									<span class="icon-bar"></span>
-								</button>
-							</div>
 
-							
-						</nav>
-						
-					</div>
-					
-					<!-- Outer Box -->
-					
-                   
+        <!-- Header Upper -->
+        <div class="header-upper">
+            <div class="outer-container">
+                <div class="inner-container clearfix">
+
+
+                    <div class="nav-outer pull-left clearfix">
+                        <!-- Mobile Navigation Toggler -->
+                        <div class="mobile-nav-toggler"><span class="icon ti-menu"></span></div>
+                        <!-- Main Menu -->
+                        <nav class="main-menu navbar-expand-md">
+                            <div class="navbar-header">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+
+
+                        </nav>
+
+                    </div>
+
+                    <!-- Outer Box -->
+
+
                 </div>
             </div>
         </div>
         <!--End Header Upper-->
-        
-		<!-- Mobile Menu  -->
+
+        <!-- Mobile Menu  -->
         <div class="mobile-menu">
             <div class="menu-backdrop"></div>
             <div class="close-btn"><span class="icon icon-close"></span></div>
-            
+
             <nav class="menu-box">
                 <div class="nav-logo"><a href="index.html"><img src="images/logo-2.png" alt="" title=""></a></div>
                 <div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
             </nav>
         </div>
-		<!-- End Mobile Menu -->
-		
+        <!-- End Mobile Menu -->
+
     </header>
     <!--End Main Header -->
-	
-	<!-- Project Detail Section -->
+
+    <!-- Project Detail Section -->
     <section class="project-detail-section">
         <div class="auto-container">
-			<!-- Title Box -->
-			<div class="title-box cent">
-				<h2>奇迹将从这里开始！</h2>
-				<div class="category">客户端&整合包</div>
-			</div>
-		</div>
-		<!-- Outer Container -->
-		<div class="outer-container">
-			<div class="image titlt" data-tilt data-tilt-max="1">
-				<img src="images/photo/3.jpg" alt="" />
-			</div>
-		</div>
-		<div class="auto-container">
-			<!-- Middle Content -->
-			<div class="middle-content cent">
-				<h2>请选择启动器</h2>
-				<h4>以压缩包的形式下载，需自行解压，内包含启动器和整合包</h4>
-				<h4>下列下载路径均由<a href="https://pan.quark.cn">
-						<p>夸克网盘</p>
-					</a>提供</h4>
+            <!-- Title Box -->
+            <div class="title-box cent">
+                <h2>奇迹将从这里开始！</h2>
+                <div class="category">客户端&整合包</div>
+            </div>
+        </div>
+        <!-- Outer Container -->
+        <div class="outer-container">
+            <div class="image titlt" data-tilt data-tilt-max="1">
+                <img src="images/photo/3.jpg" alt="" />
+            </div>
+        </div>
+        <div class="auto-container">
+            <!-- Middle Content -->
+            <div class="middle-content cent">
+                <h2>请选择启动器</h2>
+                <h4>以压缩包的形式下载，需自行解压，内包含启动器和整合包</h4>
+                <h4>国内下载路径均由<a href="https://pan.quark.cn" style="color: rgb(255, 255, 255); font-size: 26px;">夸克网盘</a>提供</h4>
+				<h4>拥有正版账号的用户可以登录正版账号<a href="https://www.minecraft.net/zh-hans" style="color: rgb(255, 255, 255); font-size: 26px;">前往购买</a></h4>
 
-					<div class="grid-container">
-						<div class="feature-card" data-delay="0">
-							<h2><img href="#" src="images/game start/favicon.png" alt="" width="60px" height="60px">
-								<br>-HMCL-</h2>
-							<h5>首选，对新手较为友好<br>提供多个论坛网站资源<br>软件完全开源免费，适合入门人选</h5><br>
-							<h4><a href="https://example.com">点击跳转</a></h4>
-						</div>
-						<div class="feature-card" data-delay="100">
-							<h2><img href="#" src="images/game start/R-C.png" alt="" width="60px" height="60px"><br>-PCL-
-							</h2>
-							<h5>启动器兼容多个版本<br>稳定性强，资源庞大<br>非完全开源，部分功能需要付费</h5><br>
-							<h4><a href="https://example.com">点击跳转</a></h4>
-						</div>
-						<div class="feature-card" data-delay="200">
-							<h2><img href="#" src="images/game start/OIP-C.png" alt="" width="60px"
-								height="60px"><br>-Modrinth-</h2>
-						<h5>全球最大的资源网站<br>无中文，需正版账号 <br><a href="https://www.minecraft.net/zh-hans"><p>需购买正版</p></a>才可以使用</h5><br>
-						<h4><a href="https://example.com">点击跳转</a></h4>
-							</div>
+                <div class="grid-container">
+                    <div class="feature-card" data-delay="0">
+                        <h2><img src="images/game start/favicon.png" alt="" width="60px" height="60px"><br>-HMCL-</h2>
+                        <h5>首选！对新手较为友好<br>提供多个论坛网站资源<br>软件完全开源免费 <br>适合入门者选择！</h5><br>
+                        <hr><h4><a href="#" class="jump-btn" data-popup="popup-1">点击跳转1</a></h4>
+                    </div>
+                    <div class="feature-card" data-delay="100">
+                        <h2><img src="images/game start/R-C.png" alt="" width="60px" height="60px"><br>-PCL-</h2>
+                        <h5>启动器兼容多个版本<br>稳定性强，资源庞大<br>非完全开源 <br>部分功能需要付费！</h5><br>
+                        <hr><h4><a href="#" class="jump-btn" data-popup="popup-2">点击跳转2</a></h4>
+                    </div>
+                    <div class="feature-card" data-delay="200">
+                        <h2><img src="images/game start/OIP-C.png" alt="" width="60px" height="60px"><br>-Modrinth-</h2>
+                        <h5>全球最大的资源网站<br>启动器无中文 <br> 需登录已购正版账号 <br>请谨慎选择！</h5><br>
+                        <hr><h4><a href="#" class="jump-btn" data-popup="popup-3">点击跳转3</a></h4>
+                    </div>
+                </div>
 
-					</div>
-				
-					<!-- 为了有足够的内容可以滚动 -->
-					<div style="height: 0vh;"></div>
-				
-					<script>
-						// 使用 Intersection Observer 实现滚动淡入效果
-						document.addEventListener('DOMContentLoaded', () => {
-							const observer = new IntersectionObserver((entries) => {
-								entries.forEach(entry => {
-									if (entry.isIntersecting) {
-										// 获取延迟时间（毫秒）
-										const delay = entry.target.getAttribute('data-delay') || 0;
-										
-										// 延迟显示，创建级联效果
-										setTimeout(() => {
-											entry.target.classList.add('visible');
-										}, delay);
-										
-										// 只触发一次
-										observer.unobserve(entry.target);
-									}
-								});
-							}, {
-								rootMargin: '0px 0px -10% 0px' // 当元素进入视口10%时触发
-							});
-				
-							// 观察所有卡片
-							document.querySelectorAll('.feature-card').forEach(card => {
-								observer.observe(card);
-							});
-						});
-					</script>
-					
-				<div>
-					<hr>
-					<h2>我有启动器</h2>
-					<p>仅下载整合包即可</p><br>
-					<a href="1.21.1_jserver.zip" download >本地下载</a>
-					<br><br>
-					<a href="1.21.1_jserver.zip" download >夸克下载</a>
-				</div>
-				<h5><br>过期请踢腐竹</h5>
-				<hr>
-				<div class="row clearfix">
-					<!-- Column -->
-					<div class="column col-lg-3 col-md-6 col-sm-12">
-						<div class="info-title">服务器地址:</div>
-						<p>IPv4地址:————服务器———— <br>映射地址:————服务器————<br>“任意即可”</p>
-					</div>
-					<!-- Column -->
-					<div class="column col-lg-3 col-md-6 col-sm-12">
-						<div class="info-title">上次更新时间:</div>
-						<p>2025年4月21日<br>19:30</p>
-					</div>
-					<!-- Column -->
-					<div class="column col-lg-3 col-md-6 col-sm-12">
-						<div class="info-title">运营团队:</div>
-						<p>服务提供:JJR<br> 运营人员:JJR <br> 服务维护:JJR</p>
-					</div>
-					<!-- Column -->
-					<div class="column col-lg-3 col-md-6 col-sm-12">
-						<div class="info-title">投资人员:</div>
-						<p>没有<br> 还是没有</p>
-					</div>
-				</div>
-			</div>
-			<!--日志开始-->
-			<h2>公告 & 日志</h2>
-			<h3>2025年4月21日: </h3>
-			<p>服务器正式投入运营</p>
-			<!--日志结束-->
-			<hr>
-			<h2>相关资讯:</h2>
-		</div>
-		<div class="outer-container">
-			<div class="two-column-images">
-				<div class="row clearfix">
-					<div class="column col-lg-6 col-md-6 col-sm-12">
-						<div class="image wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-							<img src="images/background/12.jpg" alt="" />
-						</div>
-					</div>
-					<div class="column col-lg-6 col-md-6 col-sm-12">
-						<div class="image wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
-							<img src="images/gallery/huanxiang.jpg" alt="" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="auto-container">
-			<div class="author-quote">
-			请自觉遵守游戏规则！			
-			</div>
-			<div class="author-info">游玩声明<span>本服务器为生电开放服务器，不存在任何贸易来往 <br> 如有发现，请立即联系服主 <br> 服主将封禁其IP并给予警告，严重者将依法处置！</span></div>
-			<div class="image titlt" data-tilt data-tilt-max="1">
-				<img src="images/photo/home_2.jpg" alt="" />
-			</div>
-			
-		</div>
-	</section>
-	<!-- End Project Detail Section -->
+                <div>
+                    <hr>
+                    <h2>我有启动器</h2>
+                    <p>仅下载整合包即可</p><br>
+                    <a href="1.21.1_jserver.zip" download >本地下载</a>
+                    <br><br>
+                    <a href="1.21.1_jserver.zip" download >夸克下载</a>
+                </div>
+                <h5><br>过期请踢腐竹</h5>
+                <hr>
+                <div class="row clearfix">
+                    <!-- Column -->
+                    <div class="column col-lg-3 col-md-6 col-sm-12">
+                        <div class="info-title">服务器地址:</div>
+                        <p>IPv4地址:————服务器———— <br>映射地址:————服务器————<br>“任意即可”</p>
+                    </div>
+                    <!-- Column -->
+                    <div class="column col-lg-3 col-md-6 col-sm-12">
+                        <div class="info-title">上次更新时间:</div>
+                        <p>2025年4月21日<br>19:30</p>
+                    </div>
+                    <!-- Column -->
+                    <div class="column col-lg-3 col-md-6 col-sm-12">
+                        <div class="info-title">运营团队:</div>
+                        <p>服务提供:JJR<br> 运营人员:JJR <br> 服务维护:JJR</p>
+                    </div>
+                    <!-- Column -->
+                    <div class="column col-lg-3 col-md-6 col-sm-12">
+                        <div class="info-title">投资人员:</div>
+                        <p>没有<br> 还是没有</p>
+                    </div>
+                </div>
+            </div>
+            <!--日志开始-->
+            <h2>公告 & 日志</h2>
+            <h3>2025年4月21日: </h3>
+            <p>服务器预备投入运营</p><br>
+            <h3>2025年6月3日: </h3>
+            <p>
+            1.优化了网页视觉方案，优化图片加载效果，降低了图片图标无法刷新的概率。<br>
+            2.开放对多平台启动器的支持，满足不同需求的玩家，对于有启动器的玩家可以选择仅下载整合包。<br>
+            3.添加了本地下载选项，不用完全依赖于第三方网盘，提供可选下载途径。
+            </p><br>
+            <!--日志结束-->
+            <hr>
+            <h2>相关资讯:</h2>
+        </div>
+        <div class="outer-container">
+            <div class="two-column-images">
+                <div class="row clearfix">
+                    <div class="column col-lg-6 col-md-6 col-sm-12">
+                        <div class="image wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                            <img src="images/background/12.jpg" alt="" />
+                        </div>
+                    </div>
+                    <div class="column col-lg-6 col-md-6 col-sm-12">
+                        <div class="image wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+                            <img src="images/gallery/huanxiang.jpg" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="auto-container">
+            <div class="author-quote">
+                请自觉遵守游戏规则！
+            </div>
+            <div class="author-info">游玩声明<span>本服务器为生电开放服务器，不存在任何贸易来往 <br> 如有发现，请立即联系服主 <br> 服主将封禁其IP并给予警告，严重者将依法处置！</span></div>
+            <div class="image titlt" data-tilt data-tilt-max="1">
+                <img src="images/photo/home_2.jpg" alt="" />
+            </div>
 
-			</div>
-		</div>
-	</section>
-	<!-- End Reservation Section -->
-	<hr>
-	<!-- New Post Section -->
+        </div>
+    </section>
+    <!-- End Project Detail Section -->
+
+    <hr>
+    <!-- New Post Section -->
     <section class="new-post-section">
-		<div class="auto-container">
-			<a href="index.html">返回上级</a>
-		</div>
-	</section>
-	<!-- End New Post Section -->
-	
-	<!-- Main Footer -->
+        <div class="auto-container">
+            <a href="index.html">返回上级</a>
+        </div>
+    </section>
+    <!-- End New Post Section -->
+
+    <!-- Main Footer -->
     <footer class="main-footer">
-		<div class="auto-container">
-        	<div class="info-box">
-				<div class="title">壁纸来源:</div>
-				<a class="phone" href="http://enginecat.cn/ai.html">http://enginecat.cn/ai.html</a>
-			</div>
-			
-			
-			
-		</div>
-	</footer>
-	<!-- End Main Footer -->
-	
+        <div class="auto-container">
+            <div class="info-box">
+                <div class="title">壁纸来源:</div>
+                <a class="phone" href="http://enginecat.cn/ai.html">http://enginecat.cn/ai.html</a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Main Footer -->
+
+     <!-- 弹窗1-->
+     <div id="popup-overlay-1" class="popup-overlay">
+        <div id="popup-1" class="popup">
+            <span id="popup-close-1" class="popup-close">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </span>
+			<p style="font-size: 60; color: rgb(255, 255, 255);"><img src="images/game start/favicon.png" alt="" width="40px" height="40px">HMCL</p>
+            <h3 style="color: white;">请选择下载途径:</h3>
+            <a href="https://example1.com" class="popup-link"><img src="images/app logo/github.png" alt="">  GitHub本地下载</a>
+            <a href="https://example2.com" class="popup-link"><img src="images/app logo/kuake.png" alt="">  夸克网盘下载</a>
+        </div>
+    </div>
+    <!-- 弹窗2-->
+	<div id="popup-overlay-2" class="popup-overlay">
+        <div id="popup-2" class="popup">
+            <span id="popup-close-2" class="popup-close">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </span>
+            <p style="font-size: 60; color: white;"><img src="images/game start/R-C.png" alt="" width="40px" height="40px">PCL</p>
+            <h3 style="color: white;">请选择下载途径:</h3>
+            <a href="https://example1.com" class="popup-link"><img src="images/app logo/github.png" alt="">  GitHub本地下载</a>
+            <a href="https://example2.com" class="popup-link"><img src="images/app logo/kuake.png" alt="">  夸克网盘下载</a>
+        </div>
+    </div>
+    <!-- 弹窗3-->
+    <div id="popup-overlay-3" class="popup-overlay">
+        <div id="popup-3" class="popup">
+            <span id="popup-close-3" class="popup-close">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </span>
+            <p style="font-size: 60; color: white;"><img src="images/game start/OIP-C.png" alt="" width="40px" height="40px">Modrinth</p>
+            <h3 style="color: white;">请选择下载途径:</h3>
+            <a href="https://example1.com" class="popup-link"><img src="images/app logo/github.png" alt="">  GitHub本地下载</a>
+            <a href="https://example2.com" class="popup-link"><img src="images/app logo/kuake.png" alt="">  夸克网盘下载</a>
+        </div>
+    </div>
 </div>
 <!--End pagewrapper-->
 
@@ -367,6 +437,97 @@ body {
 <script src="js/tilt.jquery.min.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script src="js/script.js"></script>
+
+<!-- 弹窗交互脚本 -->
+<script>
+    // 使用 Intersection Observer 实现滚动淡入效果
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 获取延迟时间（毫秒）
+                    const delay = entry.target.getAttribute('data-delay') || 0;
+
+                    // 延迟显示，创建级联效果
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+
+                    // 只触发一次
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '0px 0px -10% 0px' // 当元素进入视口10%时触发
+        });
+
+        // 观察所有卡片
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        // 弹窗交互增强
+        const jumpBtns = document.querySelectorAll('.jump-btn');
+        
+        // 打开弹窗函数 - 修复了 ID 处理逻辑
+        function openPopup(popupId) {
+            // 从 data-popup 属性值中提取实际的数字部分
+            const idNumber = popupId.split('-')[1];
+            const overlay = document.getElementById(`popup-overlay-${idNumber}`);
+            const popup = document.getElementById(`popup-${idNumber}`);
+            overlay.classList.add('active');
+            setTimeout(() => {
+                popup.classList.add('active');
+            }, 50);
+        }
+        
+        // 关闭弹窗函数
+        function closePopup(popupId) {
+            const overlay = document.getElementById(`popup-overlay-${popupId}`);
+            const popup = document.getElementById(`popup-${popupId}`);
+            popup.classList.remove('active');
+            setTimeout(() => {
+                overlay.classList.remove('active');
+            }, 300);
+        }
+        
+        // 点击跳转按钮显示弹窗
+        jumpBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const popupId = btn.dataset.popup;
+                openPopup(popupId);
+            });
+        });
+        
+        // 给每个关闭按钮添加点击事件
+        for (let i = 1; i <= 3; i++) {
+            const closeBtn = document.getElementById(`popup-close-${i}`);
+            closeBtn.addEventListener('click', () => {
+                closePopup(i);
+            });
+        }
+        
+        // 给每个遮罩层添加点击事件
+        for (let i = 1; i <= 3; i++) {
+            const overlay = document.getElementById(`popup-overlay-${i}`);
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    closePopup(i);
+                }
+            });
+        }
+        
+        // 给每个弹窗链接添加点击事件
+        const popupLinks = document.querySelectorAll('.popup-link');
+        popupLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const popupId = link.closest('.popup').id.split('-')[1];
+                closePopup(popupId);
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
