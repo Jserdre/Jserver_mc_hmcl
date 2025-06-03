@@ -18,11 +18,64 @@
 	<link rel="icon" href="images/favicon.png" type="image/x-icon">
 	<meta name="msapplication-TileImage" content="images/favicon.png" />
 	<style>
-		
-		.container {
-			display: flex;
-			width: 100%;
-		}
+
+body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+		 /* 容器样式 */
+		 .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 90px;
+            max-width: 1200px;
+            width: 90%;
+            margin: 100px auto;
+        }
+
+        /* 列样式 */
+        .feature-card {
+            background-color: rgba(39, 39, 39, 0.15);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgb(0, 0, 0);
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* 电脑端光标悬停效果 */
+        @media (min-width: 768px) {
+            .feature-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 4px 8px rgb(255, 157, 0);
+            }
+        }
+
+        /* 链接样式 */
+        .feature-card a {
+            display: block;
+            margin-bottom: 10px;
+            color: #ff9d00;
+            text-decoration: none;
+        }
+
+        .feature-card a:hover {
+            text-decoration: underline;
+        }
 
 		p {
 			font-size : "40px"
@@ -33,14 +86,14 @@
 			text-align: center;
 		}
 
-		/* 设置每一栏的样式 */
+		/* 设置每一栏的样式
 		.column {
 			flex: 1;
 			padding: 20px;
 			border: 0px solid #ccc;
 			text-align: center;
 		}
-
+ */
 		a {
 
 			font-size: 35px;
@@ -144,31 +197,62 @@
 				<h4>下列下载路径均由<a href="https://pan.quark.cn">
 						<p>夸克网盘</p>
 					</a>提供</h4>
-				<!-- 容器元素 -->
-				<div class="container">
-					<!-- 第一栏 -->
-					<div class="column">
-						<h2><img href="#" src="images/game start/favicon.png" alt="" width="60px" height="60px">
-							<br>-HMCL-</h2>
-						<h5>首选，对新手较为友好<br>提供多个论坛网站资源<br>软件完全开源免费，适合入门人选</h5><br>
-						<h4><a href="https://example.com">点击跳转</a></h4>
-					</div>
-					<!-- 第二栏 -->
-					<div class="column">
-						<h2><img href="#" src="images/game start/R-C.png" alt="" width="60px" height="60px"><br>-PCL-
-						</h2>
-						<h5>启动器兼容多个版本<br>稳定性强，资源庞大<br>非完全开源，部分功能需要付费</h5><br>
-						<h4><a href="https://example.com">点击跳转</a></h4>
-					</div>
-					<!-- 第三栏 -->
-					<div class="column">
-						<h2><img href="#" src="images/game start/OIP-C.png" alt="" width="60px"
+
+					<div class="grid-container">
+						<div class="feature-card" data-delay="0">
+							<h2><img href="#" src="images/game start/favicon.png" alt="" width="60px" height="60px">
+								<br>-HMCL-</h2>
+							<h5>首选，对新手较为友好<br>提供多个论坛网站资源<br>软件完全开源免费，适合入门人选</h5><br>
+							<h4><a href="https://example.com">点击跳转</a></h4>
+						</div>
+						<div class="feature-card" data-delay="100">
+							<h2><img href="#" src="images/game start/R-C.png" alt="" width="60px" height="60px"><br>-PCL-
+							</h2>
+							<h5>启动器兼容多个版本<br>稳定性强，资源庞大<br>非完全开源，部分功能需要付费</h5><br>
+							<h4><a href="https://example.com">点击跳转</a></h4>
+						</div>
+						<div class="feature-card" data-delay="200">
+							<h2><img href="#" src="images/game start/OIP-C.png" alt="" width="60px"
 								height="60px"><br>-Modrinth-</h2>
-						<h5>拥有全球最大的资源网站，内容完善<br>无中文，需要正版账号 <br>只推荐<a href="https://www.minecraft.net/zh-hans"><h5>已购正版</h5></a>用户</h5><br>
+						<h5>全球最大的资源网站<br>无中文，需正版账号 <br><a href="https://www.minecraft.net/zh-hans"><p>需购买正版</p></a>才可以使用</h5><br>
 						<h4><a href="https://example.com">点击跳转</a></h4>
+							</div>
+
 					</div>
-				</div>
-				<div class="column">
+				
+					<!-- 为了有足够的内容可以滚动 -->
+					<div style="height: 0vh;"></div>
+				
+					<script>
+						// 使用 Intersection Observer 实现滚动淡入效果
+						document.addEventListener('DOMContentLoaded', () => {
+							const observer = new IntersectionObserver((entries) => {
+								entries.forEach(entry => {
+									if (entry.isIntersecting) {
+										// 获取延迟时间（毫秒）
+										const delay = entry.target.getAttribute('data-delay') || 0;
+										
+										// 延迟显示，创建级联效果
+										setTimeout(() => {
+											entry.target.classList.add('visible');
+										}, delay);
+										
+										// 只触发一次
+										observer.unobserve(entry.target);
+									}
+								});
+							}, {
+								rootMargin: '0px 0px -10% 0px' // 当元素进入视口10%时触发
+							});
+				
+							// 观察所有卡片
+							document.querySelectorAll('.feature-card').forEach(card => {
+								observer.observe(card);
+							});
+						});
+					</script>
+					
+				<div style="">
 					<hr>
 					<h2>我有启动器</h2>
 					<p>仅下载整合包即可</p><br>
@@ -257,29 +341,7 @@
 				<a class="phone" href="http://enginecat.cn/ai.html">http://enginecat.cn/ai.html</a>
 			</div>
 			
-			<!-- Footer Bottom -->
-			<div class="footer-bottom">
-				<div class="auto-container">
-					<div class="bottom-inner">
-						<div class="row clearfix">
-							
-							<!--<div class="col-lg-8 col-md-12 col-sm-12">
-								<p class="copyright mb-0">&copy; <span>Edward </span><script type="text/javascript">document.write(new Date().getFullYear());</script>. <a target="_blank" href="http://www.mobanwang.com/" title="网页模板">网页模板</a></p>
-							</div>
-							
-							<div class="col-lg-4 col-md-12 col-sm-12">
-								<ul class="social-nav">
-									<li class="twitter"><a href="#">Twitter</a></li>
-									<li class="behance"><a href="#">behance</a></li>
-									<li class="dribbble"><a href="#">dribbble</a></li>
-									<li class="github"><a href="#">Github</a></li>
-								</ul>
-							</div>
-						-->
-						</div>
-					</div>
-				</div>	
-			</div>
+			
 			
 		</div>
 	</footer>
